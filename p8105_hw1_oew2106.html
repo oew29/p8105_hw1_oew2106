@@ -401,21 +401,21 @@ problem_1_df = data.frame(column_1, column_2, column_3, column_4, stringsAsFacto
 
 print(problem_1_df)</code></pre>
 <pre><code>##     column_1 column_2 column_3 column_4
-## 1 -0.5236354    FALSE        a      red
-## 2  1.3302920     TRUE        b     blue
-## 3  0.7965690     TRUE        c   purple
-## 4 -1.7181655    FALSE        d      red
-## 5 -1.5643853    FALSE        e     blue
-## 6 -0.3703784    FALSE        f   purple
-## 7 -0.2253774    FALSE        g      red
-## 8  1.2744577     TRUE        h     blue</code></pre>
+## 1 -0.1698804    FALSE        a      red
+## 2  0.5815858     TRUE        b     blue
+## 3  0.1161001     TRUE        c   purple
+## 4  0.6023944     TRUE        d      red
+## 5  0.3500881     TRUE        e     blue
+## 6 -0.4729351    FALSE        f   purple
+## 7  0.7038264     TRUE        g      red
+## 8 -0.2016573    FALSE        h     blue</code></pre>
 <pre class="r"><code># Find the mean of each variable in the data frame #
 
 
 mean(column_1)</code></pre>
-<pre><code>## [1] -0.1250779</code></pre>
+<pre><code>## [1] 0.1886903</code></pre>
 <pre class="r"><code>mean(column_2)</code></pre>
-<pre><code>## [1] 0.375</code></pre>
+<pre><code>## [1] 0.625</code></pre>
 <pre class="r"><code>mean(column_3)</code></pre>
 <pre><code>## Warning in mean.default(column_3): argument is not numeric or logical:
 ## returning NA</code></pre>
@@ -428,7 +428,7 @@ mean(column_1)</code></pre>
 
 
 as.numeric(column_2)</code></pre>
-<pre><code>## [1] 0 1 1 0 0 0 0 1</code></pre>
+<pre><code>## [1] 0 1 1 1 1 0 1 0</code></pre>
 <pre class="r"><code>as.numeric(column_3)</code></pre>
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
 <pre><code>## [1] NA NA NA NA NA NA NA NA</code></pre>
@@ -436,6 +436,28 @@ as.numeric(column_2)</code></pre>
 <pre><code>## [1] 3 1 2 3 1 2 3 1</code></pre>
 <p>I can take the mean of the first and second columns, or the numeric and logical variables. I cannot take the mean of the factor or character columns.</p>
 <p>Using the as.numeric command I am able to convert the logical and factor variables to numeric, while I am unable to do so with the character variable. This explains the problem with computing the mean in the character varaible. Because R cannot assign numeric placeholder variables to characters, it is unable to compute a mean from the individual strings in the column.Though R can assign placeholder values to a factor variable, it is still unable to calculate a mean. Because a factor variable is multilayered categorical variable, R would be taking a mean of fixed values. The result would not be representative of anything meaningful.</p>
+<p>** Part 2 **</p>
+<pre class="r"><code># Convert logical vector to numeric and multiply by the random sample vector #
+column_2_numeric = as.numeric(column_2)
+random_sample_numeric = column_1 * column_2_numeric
+
+print(random_sample_numeric)</code></pre>
+<pre><code>## [1] 0.0000000 0.5815858 0.1161001 0.6023944 0.3500881 0.0000000 0.7038264
+## [8] 0.0000000</code></pre>
+<pre class="r"><code># Convert the logical vector to factor and multiply by the random sample vector #
+column_2_factor = as.factor(column_2)
+random_sample_factor = column_1 * column_2_factor</code></pre>
+<pre><code>## Warning in Ops.factor(column_1, column_2_factor): '*' not meaningful for
+## factors</code></pre>
+<pre class="r"><code>print(random_sample_factor)</code></pre>
+<pre><code>## [1] NA NA NA NA NA NA NA NA</code></pre>
+<pre class="r"><code># Convert the logical vector to factor then to numeric, and multiply by the random sample vector #
+column_2_factor_to_numeric = as.numeric(as.factor(column_2))
+random_sample_factor_to_numeric = column_1 * column_2_factor_to_numeric
+
+print(random_sample_factor_to_numeric)</code></pre>
+<pre><code>## [1] -0.1698804  1.1631716  0.2322001  1.2047887  0.7001762 -0.4729351
+## [7]  1.4076529 -0.2016573</code></pre>
 </div>
 
 

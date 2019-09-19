@@ -66,3 +66,28 @@ as.numeric(column_4)
   
   
 
+** Part 2 **
+```{r problem 1, convert column types}
+
+# Convert logical vector to numeric and multiply by the random sample vector #
+column_2_numeric = as.numeric(column_2)
+random_sample_numeric = column_1 * column_2_numeric
+
+print(random_sample_numeric)
+
+
+# Convert the logical vector to factor and multiply by the random sample vector #
+column_2_factor = as.factor(column_2)
+random_sample_factor = column_1 * column_2_factor
+
+print(random_sample_factor)
+
+
+# Convert the logical vector to factor then to numeric, and multiply by the random sample vector #
+column_2_factor_to_numeric = as.numeric(as.factor(column_2))
+random_sample_factor_to_numeric = column_1 * column_2_factor_to_numeric
+
+print(random_sample_factor_to_numeric)
+
+```
+
