@@ -1,28 +1,68 @@
 ---
-title: "Homework 1"
+title: "Homework 1 Data Science I"
+author: "Olivia Wagner"
+date: 2019-09-14
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
 ```
 
-## R Markdown
+## Problem 1 ##
+** Part 1 **
+```{r problem 1, data frame}
+# create individual columns based on specifcations #
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+column_1 = rnorm(8, mean = 0, sd = 1) 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+column_2 = (column_1 > 0) 
 
-```{r cars}
-summary(cars)
+column_3 = c("a", "b", "c", "d", "e", "f", "g", "h")
+
+column_4 = factor(c('red', 'blue', 'purple', 'red', 'blue', 'purple', 'red', 'blue'))
+  
+
+# combine to create a data frame #
+
+
+problem_1_df = data.frame(column_1, column_2, column_3, column_4, stringsAsFactors = FALSE)
+
+print(problem_1_df)
+
+
+# Find the mean of each variable in the data frame #
+
+
+mean(column_1)
+
+mean(column_2)
+
+mean(column_3)
+
+mean(column_4)
+
+
+# Try to adjust each column to be of type numeric #
+
+
+as.numeric(column_2)
+
+as.numeric(column_3)
+
+as.numeric(column_4)
+
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+  I can take the mean of the first and second columns, or the numeric and logical variables. I cannot take the mean of the factor or character columns.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+  Using the as.numeric command I am able to convert the logical and factor variables to numeric, while I am unable to do so with the character variable. This explains the problem with computing the mean in the character varaible. Because R cannot assign numeric placeholder variables to characters, it is unable to compute a mean from the individual strings in the column.Though R can assign placeholder values to a factor variable, it is still unable to calculate a mean.  Because a factor variable is multilayered categorical variable, R would be taking a mean of fixed values. The result would not be representative of anything meaningful.
+  
+  
+  
+
