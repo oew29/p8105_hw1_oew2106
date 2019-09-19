@@ -91,3 +91,71 @@ print(random_sample_factor_to_numeric)
 
 ```
 
+
+
+## Problem 2 ##
+
+```{r problem 2}
+
+x = rnorm(500, mean = 0, sd = 1)
+
+y = rnorm(500, mean = 0, sd = 1)
+
+logical_test = (x + y > 1)
+
+numeric_test = as.numeric(logical_test)
+
+factor_test = as.factor(logical_test)
+
+problem_2_df = data.frame(x, y, logical_test, numeric_test,factor_test, stringsAsFactors = FALSE)
+
+
+# descriptive statistics about the data frame #
+
+rows = nrow(problem_2_df)
+cols = ncol(problem_2_df)
+
+mean = mean(x)
+median = median(x)
+sd = sd(x)
+
+true = sum(logical_test, na.rm = TRUE)
+false = (rows - true)
+true_prop = (true/rows)
+
+
+# Scatterplot of y vs. x, using logical variable coloring #
+
+ggplot(data = problem_2_df) +
+  geom_point(mapping = aes(x = x, y = y, color = logical_test))
+
+# Save scatterplot to Project #
+
+ggsave('XY_Scatterplot.pdf')
+
+# Scatterplot of y vs. x, using numeric variable coloring #
+
+ggplot(data = problem_2_df) +
+  geom_point(mapping = aes(x = x, y = y, color = numeric_test))
+
+
+# Scatterplot of y vs. x, using factor variable coloring #
+
+ggplot(data = problem_2_df) +
+  geom_point(mapping = aes(x = x, y = y, color = factor_test))
+
+
+```
+
+** Part 1 **
+
+The data set is `r cols` wide and `r rows` long. 
+
+The mean of the column x is `r mean`, the median of column x is `r median` and standard deviation of column x is `r sd`. 
+
+The proportion of cases for which the third column, logical_test, returns true is `r true_prop`. 
+
+
+** Part 2 **
+
+The color scale switches between factor and numeric variables. Because a factor is necessarily a integer, there is a distinct color per each integer. A numeric variable can take the value of any real number, so the color scale must be gradient to account for the infinite number of values between the maximum and minimum value. 
